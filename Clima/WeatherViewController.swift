@@ -11,7 +11,6 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-
 class WeatherViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDelegate {
     
     //Constants
@@ -78,7 +77,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         
         if let tempResult = json["main"]["temp"].double {
         
-        weatherDataModel.temperature = Int(tempResult - 273.15) + 32
+        print(tempResult)
+        weatherDataModel.temperature = Int((tempResult - 273.15) * 1.8 + 32)
+        print(weatherDataModel.temperature)
         weatherDataModel.city = json["name"].stringValue
         weatherDataModel.condition = json["weather"][0]["id"].intValue
         weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
